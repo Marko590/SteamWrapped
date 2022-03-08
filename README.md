@@ -1,4 +1,4 @@
-#### Steam Wrapped
+### Steam Wrapped
 
 ASP.NET Web API which fetches a users' list of games, along with hours played and other info,
 which will be used alongside a React frontend.
@@ -17,7 +17,7 @@ along with the achievements of the user whose steamID is `id`
 
 ## To-do
   
- -[] Add support for custom steam URL (if possible)
- -[x] Add error handling for invalid steamIDs
- -[] Add friends list support
- -[x] Add support for fetching achievement info
+- [ ] Add support for custom steam URL (if possible)
+- [x] Add error handling for invalid SteamIDs
+- [x] Add support for fetching achievement info
+- [ ] Add friends list support
