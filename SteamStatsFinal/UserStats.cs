@@ -16,57 +16,37 @@ namespace SteamStatsFinal
 {
 
 
-    internal class UserStats
-    {
+    internal class UserStats { 
 
-        private ulong steamId;
-        private string url;
-        private SteamWebInterfaceFactory webInterfaceFactory;
-        private SteamStore steamInterface;
+        private InfoTemplate infoTemplate;
 
-
-
-
-        public UserStats(ulong steamId)
+        public UserStats(InfoTemplate info) 
         {
-            String url = "http://steamcommunity.com/profiles/" + steamId + "/games?tab=all&xml=1";
-            this.steamId = steamId;
-            this.webInterfaceFactory = new SteamWebInterfaceFactory(System.Environment.GetEnvironmentVariable("SteamSecret"));
-
-            this.steamInterface = webInterfaceFactory.CreateSteamStoreInterface();
-            this.url = url;
+            this.infoTemplate = info;
         }
-
-        public List<XElement> getGameList()
+        public List<XElement>? getGameList()
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             byte[] data;
             using (WebClient webClient = new WebClient())
-                data = webClient.DownloadData(url);
+                data = webClient.DownloadData(infoTemplate.url);
 
             string str = Encoding.GetEncoding("Windows-1252").GetString(data);
             XDocument xd = XDocument.Parse(str);
             try
             {
-
-
-                var gamesList = xd.Element("gamesList").Element("games").Elements().ToList();
-
-
+                var gamesList = xd.Element("gamesList")?.Element("games").Elements().ToList() ?? null;
                 return gamesList;
-
             }
             catch (Exception ex)
             {
                 return null;
             }
-
         }
 
         public List<Tuple<string, float, ulong>>? getHoursPerGame()
         {
             List<Tuple<string, float, ulong>> list = new List<Tuple<string, float, ulong>>();
-
             var gameList = getGameList();
             if (gameList == null)
             {
@@ -110,8 +90,8 @@ namespace SteamStatsFinal
 
         public UserInfo getUserInfo()
         {
-            var userInterface = webInterfaceFactory.CreateSteamWebInterface<SteamWebAPI2.Interfaces.SteamUser>();
-            var summaryResponse = userInterface.GetPlayerSummaryAsync(steamId).Result;
+            var userInterface = infoTemplate.createInterface<SteamWebAPI2.Interfaces.SteamUser>();
+            var summaryResponse = userInterface.GetPlayerSummaryAsync(infoTemplate.steamId).Result;
             var summaryData = summaryResponse.Data;
 
             UserInfo userInfo = new UserInfo();
