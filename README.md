@@ -1,11 +1,11 @@
-### Steam Wrapped
+# Steam Wrapped
 
 ASP.NET Web API which fetches a users' list of games, along with hours played and other info,
 which will be used alongside a React frontend.
 
 ---
 
-### Usage
+## Usage
 
 `https://localhost:{port}/SteamStats/{id}` - returns a JSON object consisting of basic info on a user, and also their games 
 with their hours played.
