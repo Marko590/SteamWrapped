@@ -17,7 +17,7 @@ along with the achievements of the user whose steamID is `id`
 
 ## To-do
   
-  1. Add support for custom steam URL (if possible)
-  2. Add error handling for invalid steamIDs
-  3. Add friends list support
-  4. Add support for fetching achievement info
+ -[] Add support for custom steam URL (if possible)
+ -[x] Add error handling for invalid steamIDs
+ -[] Add friends list support
+ -[x] Add support for fetching achievement info
