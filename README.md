@@ -3,7 +3,6 @@
 ASP.NET Web API which fetches a users' list of games, along with hours played and other info,
 which will be used alongside a React frontend.
 
----
 
 ## Usage
 
@@ -13,7 +12,7 @@ ____
 `https://localhost:{port}/SteamStats/{id}/achievements/{appId}` - returns a JSON object consisting of info about the game on the steam page `https://steamcommunity.com/app/{appId}`,
 along with the achievements of the user whose steamID is `id`
 
----
+
 
 ## To-do
   
