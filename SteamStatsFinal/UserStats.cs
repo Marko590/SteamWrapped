@@ -24,7 +24,6 @@ namespace SteamStatsFinal
         {
             this.infoTemplate = info;
         }
-
         public List<XElement>? getGameList()
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -37,7 +36,6 @@ namespace SteamStatsFinal
             try
             {
                 var gamesList = xd.Element("gamesList")?.Element("games").Elements().ToList() ?? null;
-
                 return gamesList;
             }
             catch (Exception ex)
@@ -49,7 +47,6 @@ namespace SteamStatsFinal
         public List<Tuple<string, float, ulong>>? getHoursPerGame()
         {
             List<Tuple<string, float, ulong>> list = new List<Tuple<string, float, ulong>>();
-
             var gameList = getGameList();
             if (gameList == null)
             {

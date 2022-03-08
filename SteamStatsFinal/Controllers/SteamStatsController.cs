@@ -10,14 +10,11 @@ namespace SteamStatsFinal.Controllers
     [Route("[controller]")]
     public class SteamStatsController : ControllerBase
     {
-
         private readonly ILogger<SteamStatsController> _logger;
-
         public SteamStatsController(ILogger<SteamStatsController> logger)
         {
             _logger = logger;
         }
-
 
         [HttpGet("{steamId}")]
         public ResponseObject Get2(ulong steamId)
@@ -25,6 +22,7 @@ namespace SteamStatsFinal.Controllers
             var ui = new UserStats(new InfoTemplate(steamId));
 
             IEnumerable<Game> games = ui.populateArray();
+
             if (games == null)
             {
                 ResponseObject responseObject = new ResponseObject();

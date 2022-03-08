@@ -11,8 +11,6 @@ namespace SteamStatsFinal
         private InfoTemplate infoTemplate;
         public ulong appId;
 
-
-
         public AchievementStats(InfoTemplate infoTemplate,ulong appId)
         {
             this.infoTemplate= infoTemplate;
@@ -54,8 +52,6 @@ namespace SteamStatsFinal
             hoursPlayed = hoursPlayed.Replace(",", String.Empty);
             gameInfo.Hours = float.Parse(hoursPlayed);
 
-            this.gameInfo = gameInfo;
-            
             var achievementList = xd.Element("playerstats").Element("achievements").Elements().ToList();
             return achievementList;
         }
@@ -73,10 +69,12 @@ namespace SteamStatsFinal
             foreach(var achievement in allAchievements)
             {
                 Achievement current = new Achievement();
+
                 current.Name = achievement.Element("name").Value;
                 current.Description=achievement.Element("description").Value;
                 current.unlockTimestamp = ulong.Parse(achievement.Element("unlockTimestamp")?.Value ?? "0");
                 current.isFinished = int.Parse(achievement.FirstAttribute.Value) == 1 ? true : false;
+
                 achievements.Add(current);
             }
             return achievements;
